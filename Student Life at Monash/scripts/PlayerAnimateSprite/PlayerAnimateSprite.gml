@@ -1,4 +1,3 @@
-
 function PlayerAnimateSprite(){
 	// Update Sprite
 	var _cardinalDirection = round(direction/90);
