@@ -1,12 +1,12 @@
 {
   "$GMScript":"",
-  "%Name":"PlayerStateRoll",
+  "%Name":"DrawSetText",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PlayerStateRoll",
+  "name":"DrawSetText",
   "parent":{
-    "name":"Player",
-    "path":"folders/Scripts/Player.yy",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
