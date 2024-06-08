@@ -1,5 +1,4 @@
 /// @description Initialize Variables
-
 x1 = RESOLUTION_W * 0.5;
 y1 = RESOLUTION_H - 70;
 x2 = RESOLUTION_W * 0.5;
@@ -11,5 +10,6 @@ x2Target = RESOLUTION_W;
 lerpProgress = 0;
 textProgress = 0;
 
-text = "Default message text";
+text = "Default Message";
 background = 0;
+ticket = instance_number(oText);
