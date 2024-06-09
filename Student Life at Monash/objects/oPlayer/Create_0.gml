@@ -15,7 +15,6 @@ spriteRun = sPlayerRun;
 spriteRoll = sPlayerRoll
 localFrame = 0;
 
-
 // Player Inputs
 keyLeft = false;
 keyRight = false;
@@ -23,6 +22,7 @@ keyUp = false;
 keyDown = false;
 
 keyActivate = false;
+keyInteract = false;
 keyAttack = false;
 keyItem = false;
 
