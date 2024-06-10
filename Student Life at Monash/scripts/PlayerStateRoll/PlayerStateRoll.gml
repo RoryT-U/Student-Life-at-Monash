@@ -2,8 +2,6 @@ function PlayerStateRoll(){
 	// Movement
 	hSpeed = lengthdir_x(speedRoll, direction);
 	vSpeed = lengthdir_y(speedRoll, direction);
-
-	PlayerCollision();
 	
 	moveDistanceRemaining = max(0, moveDistanceRemaining - speedRoll);
 	
@@ -17,5 +15,10 @@ function PlayerStateRoll(){
 	// Change State
 	if (moveDistanceRemaining <= 0){
 		state = PlayerStateFree;
+	}
+	
+	if (_collided){
+		state = PlayerStateFree;
+		ScreenShake(1.5, 30);
 	}
 }

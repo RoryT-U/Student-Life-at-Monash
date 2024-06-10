@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"TextTopics",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TextTopics",
+  "parent":{
+    "name":"Text",
+    "path":"folders/Scripts/Text.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

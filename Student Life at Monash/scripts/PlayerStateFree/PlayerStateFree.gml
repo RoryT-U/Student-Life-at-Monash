@@ -21,9 +21,25 @@ function PlayerStateFree(){
 
 	PlayerAnimateSprite(); 
 	
-	// Change State
-	if (keyActivate){
+	if (keyInteract){
+		// Check for Entity to Activate
+		var _activateX = lengthdir_x(10, direction);
+		var _activateY = lengthdir_y(10, direction);
+		interact = instance_position(x+_activateX, y+_activateY, pEntity);
+		
+		// If No Entity or Entity cannot be Activated
+		if (interact != noone && interact.entityInteractScript != EmptyScript) {
+			script_execute_ext(interact.entityInteractScript, interact.entityInteractArgs);
+			
+			if (interact.entityNPC){
+				with (interact){
+					direction = point_direction(x, y, other.x, other.y);
+					image_index = CARDINAL_DIR;
+				}
+			}
+		}
+	} else if (keyActivate){
 		state = PlayerStateRoll;
-		moveDistanceRemaining = distanceRoll;
+		moveDistanceRemaining = distanceRoll;	
 	}
 }
