@@ -1,2 +1,2 @@
-testEntityInteractScript = NewTextBox;
-testEntityInteractArgs = ["Welcome to the Game", 0];
+entityInteractScript = StartDialogue;
+entityInteractArgs = ["Example", 0];

@@ -1,9 +1,9 @@
 {
   "$GMScript":"",
-  "%Name":"DrawSetText",
+  "%Name":"DrawText",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"DrawSetText",
+  "name":"DrawText",
   "parent":{
     "name":"Text",
     "path":"folders/Scripts/Text.yy",

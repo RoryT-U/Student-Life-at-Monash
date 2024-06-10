@@ -28,8 +28,8 @@ function PlayerStateFree(){
 		interact = instance_position(x+_activateX, y+_activateY, pEntity);
 		
 		// If No Entity or Entity cannot be Activated
-		if (interact != noone && interact.testEntityInteractScript != EmptyScript) {
-			script_execute_ext(interact.testEntityInteractScript, interact.testEntityInteractArgs);
+		if (interact != noone && interact.entityInteractScript != EmptyScript) {
+			script_execute_ext(interact.entityInteractScript, interact.entityInteractArgs);
 			
 			if (interact.entityNPC){
 				with (interact){

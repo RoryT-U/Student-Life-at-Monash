@@ -1,2 +1,2 @@
-testEntityInteractScript = NewTextBox;
-testEntityInteractArgs = ["Hello", 0];
+entityInteractScript = StartDialogue;
+entityInteractArgs = ["Default", 0]
