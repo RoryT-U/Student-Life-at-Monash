@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"TextActions",
   "isCompatibility":false,
   "isDnD":false,
