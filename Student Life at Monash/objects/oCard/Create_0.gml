@@ -13,7 +13,7 @@ homeY = y;
 homeOffsetY = 0;
 
 // random card
-cardID = choose(0, 1);
+cardID = choose(0, 1, 2);
 // card = struct
 
 setHover = function(_set) {

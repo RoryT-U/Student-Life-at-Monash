@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-#macro SPACING 40
+#macro SPACING 28
 
 cards = [];
 selectedIndex = -1;
