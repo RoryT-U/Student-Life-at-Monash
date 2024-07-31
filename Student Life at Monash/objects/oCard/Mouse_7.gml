@@ -20,11 +20,11 @@ if !dragged {
 	
 	if _deck == noone || _deck.selectable == false {
 		// drop on field
-		oCardController.cardScore += 1.3;
-		// card.effect();
-		instance_destroy();
-		//home_x = x;
-		//home_y = y;
+		setHover(false);
+		with (oCardController) {
+			cardScore += 1.3;
+			discard.insertCard(other, discard.cardCount());
+		}
 	} else if _deck != deck {
 		// add to deck
 		with _deck {

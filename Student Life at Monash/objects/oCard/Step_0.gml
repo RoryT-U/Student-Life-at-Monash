@@ -1,5 +1,6 @@
 /// @description Return to home
-// You can write your code in this editor
+
+#macro COMPACT_SCALE 0.1
 
 if dragged {
 	x = lerp(x, mouse_x, 0.5);
@@ -10,5 +11,15 @@ if dragged {
 	}
 } else {
 	x = lerp(x, homeX, 0.2);
-	y = lerp(y, homeY + homeOffsetY, 0.2);
+	y = lerp(y, homeY, 0.2);
+	visualOffsetY = lerp(visualOffsetY, homeOffsetY, 0.2);
+	
+	//var _homeScale = 1;
+	//with (deck) {
+	//	if (compact) {
+	//		_homeScale = 0.1;	
+	//	}
+	//}
+	//image_xscale = lerp(image_xscale, _homeScale, 0.2);
+	//image_yscale = lerp(image_yscale, _homeScale, 0.2);
 }

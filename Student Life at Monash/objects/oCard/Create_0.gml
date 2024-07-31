@@ -10,6 +10,7 @@ mouseInside = false;
 homeX = x;
 homeY = y;
 
+visualOffsetY = 0;
 homeOffsetY = 0;
 
 // random card
