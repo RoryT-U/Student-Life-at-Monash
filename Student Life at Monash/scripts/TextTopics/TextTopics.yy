@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"TextTopics",
   "isCompatibility":false,
   "isDnD":false,

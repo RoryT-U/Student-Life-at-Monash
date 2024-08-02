@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"PlayerAnimateSprite",
   "isCompatibility":false,
   "isDnD":false,

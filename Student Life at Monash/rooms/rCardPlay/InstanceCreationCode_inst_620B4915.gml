@@ -1,0 +1,1 @@
+oCardController.hand = self;
