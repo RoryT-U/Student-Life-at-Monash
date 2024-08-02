@@ -47,3 +47,20 @@ global.topics[$ "Chose Pancakes"] = [
 global.topics[$ "End of Breakfast"] = [
 	TEXT("Goodbye, now!")
 ];
+
+
+global.topics[$ "Temp Battle"] = [
+	TEXT("Hello there!"),
+	CHOICE("Would you like to battle?",
+		OPTION("Yes", "Battle Accepted"),
+		OPTION("No", "Battle Declined"))
+]
+
+global.topics[$ "Battle Accepted"] = [
+	TEXT("You won't be able to beat me"),
+	BATTLE(rCardPlay)
+];
+
+global.topics[$ "Battle Declined"] = [
+	TEXT("Scaredy Cat")
+];

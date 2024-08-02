@@ -1,2 +1,2 @@
 entityInteractScript = StartDialogue;
-entityInteractArgs = ["Welcome to the Game", 2];
+entityInteractArgs = ["Good Morning", 2];

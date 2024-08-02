@@ -3,6 +3,7 @@
 #macro CHOICE new ChoiceAction
 #macro OPTION new OptionAction
 #macro GOTO new GotoAction
+#macro BATTLE new BattleAction 
 
 function DialogueAction() constructor {
 	Act = function() { };
@@ -69,5 +70,15 @@ function GotoAction(_topic): DialogueAction() constructor {
 
 	Act = function(_textbox) {
 		_textbox.setTopic(topic);
+	}
+}
+
+// Starts a Card Battle
+function BattleAction(_battle) : DialogueAction() constructor {
+	battle = _battle;
+	
+	
+	Act = function(_textbox) {
+		room_goto(battle);
 	}
 }
