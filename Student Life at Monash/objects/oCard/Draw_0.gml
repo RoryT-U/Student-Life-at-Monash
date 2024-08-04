@@ -19,4 +19,4 @@ draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 var _texts = ["+1.3", "Grass", "-6.9"];
 draw_set_font(fCardText);
-draw_text(x, y + visualOffsetY + CARD_TEXT_Y_OFFSET, _texts[cardID]);
+draw_text_transformed(x, y + visualOffsetY + CARD_TEXT_Y_OFFSET, _texts[cardID], 0.75, 0.75, 0);
