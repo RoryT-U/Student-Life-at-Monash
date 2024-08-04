@@ -1,3 +1,4 @@
 oCardController.discard = self;
-compact = true;
+faceDown = true;
+spacing = 0;
 selectable = false;

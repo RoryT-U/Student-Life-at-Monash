@@ -79,6 +79,7 @@
     {"id":{"name":"sCardImages","path":"sprites/sCardImages/sCardImages.yy",},},
     {"id":{"name":"sCol","path":"sprites/sCol/sCol.yy",},},
     {"id":{"name":"sDeck","path":"sprites/sDeck/sDeck.yy",},},
+    {"id":{"name":"sGamer","path":"sprites/sGamer/sGamer.yy",},},
     {"id":{"name":"sName","path":"sprites/sName/sName.yy",},},
     {"id":{"name":"sOptionArrow","path":"sprites/sOptionArrow/sOptionArrow.yy",},},
     {"id":{"name":"sPlayer","path":"sprites/sPlayer/sPlayer.yy",},},

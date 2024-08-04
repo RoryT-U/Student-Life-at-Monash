@@ -7,7 +7,8 @@ cards = [];
 selectedIndex = -1;
 gapIndex = -1;
 selectable = true;
-compact = false;
+faceDown = false;
+spacing = SPACING;
 
 discardTarget = noone;
 
@@ -31,7 +32,7 @@ insertCard = function(_card, _index = 0) {
 	array_insert(cards, _index, _card);
 	selectedIndex = _index;
 	_card.deck = self;
-	_card.image_index = compact ? 1 : 0;
+	_card.image_index = faceDown ? 1 : 0;
 	
 	updateCardHome();
 }
@@ -68,17 +69,7 @@ setGapIndex = function(_index) {
 /// @desc Update position cards return to in deck as well as their index and depth
 updateCardHome = function() {
 	var _cardCount = array_length(cards);
-	if (compact) {
-		// compact decks stack cards on top of each other
-		for (var i = 0; i < _cardCount; i++) {
-			with (cards[i]) {
-				deckIndex = i;
-				homeX = other.x;
-				homeY = other.y;
-				updateDepth();
-			}	
-		}
-	} else if (gapIndex == -1) {
+	if (gapIndex == -1) {
 		var _leftMost = x - ((_cardCount - 1) / 2) * SPACING;
 		for (var i = 0; i < _cardCount; i++) {
 			var _card = cards[i];
