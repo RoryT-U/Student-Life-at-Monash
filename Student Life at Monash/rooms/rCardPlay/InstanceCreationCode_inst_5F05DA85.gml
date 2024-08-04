@@ -1,7 +1,3 @@
 // discard hand
-text = "Shuffle";
-onClick = function() {
-	with (oCardController) {
-		hand.shuffle();
-	}
-}
+text = "Score";
+onClick = oCardController.scoreStack;

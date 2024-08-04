@@ -20,10 +20,19 @@ if !dragged {
 	
 	if _deck == noone || _deck.selectable == false {
 		// drop on field
-		setHover(false);
-		with (oCardController) {
-			cardScore += 1.3;
-			discard.insertCard(other, discard.cardCount());
+		var _playResult = cardData.PlayEffect();
+		if (_playResult != -1) {
+			// success
+			setHover(false);
+			with (oCardController.getDeck(_playResult)) {
+				insertCard(other);
+			}
+		} else {
+			// failure
+			with global.lastDeck {
+				insertCard(other, global.lastIndex);
+				selectedIndex = global.lastIndex;
+			}
 		}
 	} else if _deck != deck {
 		// add to deck
@@ -36,6 +45,8 @@ if !dragged {
 } else {
 	// pick up card
 	global.draggingCard = true;
+	global.lastDeck = deck;
+	global.lastIndex = deckIndex;
 	
 	// unhover and remove
 	with deck {

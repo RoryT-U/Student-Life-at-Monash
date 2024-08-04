@@ -1,14 +1,15 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-#macro SPACING 28
+#macro SMALL_SPACING 28
+#macro LARGE_SPACING 48
 
 cards = [];
 selectedIndex = -1;
 gapIndex = -1;
 selectable = true;
 faceDown = false;
-spacing = SPACING;
+spacing = SMALL_SPACING;
 
 discardTarget = noone;
 
@@ -21,7 +22,10 @@ shuffle = function() {
 	updateCardHome();
 }
 
-insertCard = function(_card, _index = 0) {
+/// @desc Insert card at specified index, default to inserting at the end
+/// @param {Id.Instance}	_card	Card to insert
+/// @param {real}			_index	Index to insert card at, defaults to current card count
+insertCard = function(_card, _index = cardCount()) {
 	if _card.deck == self {
 		return;
 	}
@@ -48,11 +52,11 @@ removeCard = function(_card) {
 cardInside = function(_x, _y) {
 	var _cardCount = array_length(cards);
 	
-	var _boundsLeft = x - (_cardCount / 2) * SPACING;
-	var _index = floor((_x - _boundsLeft) / SPACING);
+	var _boundsLeft = x - (_cardCount / 2) * spacing;
+	var _index = floor((_x - _boundsLeft) / spacing);
 	
 	if _index < 0 {
-		_index = -1;
+		_index = 0;
 	} else if _index > _cardCount {
 		_index = _cardCount;	
 	}
@@ -69,24 +73,24 @@ setGapIndex = function(_index) {
 /// @desc Update position cards return to in deck as well as their index and depth
 updateCardHome = function() {
 	var _cardCount = array_length(cards);
-	if (gapIndex == -1) {
-		var _leftMost = x - ((_cardCount - 1) / 2) * SPACING;
+	if (gapIndex == -1 || !selectable) {
+		var _leftMost = x - ((_cardCount - 1) / 2) * spacing;
 		for (var i = 0; i < _cardCount; i++) {
 			var _card = cards[i];
 		
 			_card.deckIndex = i;
-			_card.homeX = _leftMost + i * SPACING;
+			_card.homeX = _leftMost + i * spacing;
 			_card.homeY = y;
 			_card.updateDepth();
 		}
 	} else {
-		var _leftMost = x - (_cardCount / 2) * SPACING;
+		var _leftMost = x - (_cardCount / 2) * spacing;
 		// pre gap
 		for (var i = 0; i < gapIndex; i++) {
 			var _card = cards[i];
 		
 			_card.deckIndex = i;
-			_card.homeX = _leftMost + i * SPACING;
+			_card.homeX = _leftMost + i * spacing;
 			_card.homeY = y;
 			_card.updateDepth();
 		}
@@ -95,7 +99,7 @@ updateCardHome = function() {
 			var _card = cards[i];
 		
 			_card.deckIndex = i;
-			_card.homeX = _leftMost + (i + 1) * SPACING;
+			_card.homeX = _leftMost + (i + 1) * spacing;
 			_card.homeY = y;
 			_card.updateDepth();
 		}
@@ -104,7 +108,7 @@ updateCardHome = function() {
 
 /// @desc Transfer some number of top cards to another deck (cards of higher index are on top)
 /// @param {Id.Instance}	_targetDeck	Deck to transfer cards to
-/// @param					_number		Cards to transfer, defaults to all cards
+/// @param {real}			_number		Cards to transfer, defaults to all cards
 transferCards = function(_targetDeck, _number = cardCount(), _callback = EmptyScript) {
 	_number = min(_number, cardCount());
 	
