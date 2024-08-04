@@ -14,7 +14,7 @@ visualOffsetY = 0;
 homeOffsetY = 0;
 
 // random card
-cardData = global.cardCatalogue[choose(0, 1, 2)];
+cardData = variable_clone(global.cardCatalogue[choose(0, 1, 2)]);
 // card = struct
 
 setHover = function(_set) {

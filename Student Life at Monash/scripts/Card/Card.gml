@@ -49,6 +49,8 @@ function Card(_name, _description, _imageID, _type, _cost, _playEffect = EFFECT_
 	type = _type;
 	cost = _cost;
 	
+	// returns a deck index to determine what deck it ends up in after being played
+	// a return index of -1 means the card failed to play and should be returned to hand
 	PlayEffect = _playEffect;
 	ScoreEffect = _scoreEffect;
 	DiscardEffect = _discardEffect; // am i using this correctly? :P
