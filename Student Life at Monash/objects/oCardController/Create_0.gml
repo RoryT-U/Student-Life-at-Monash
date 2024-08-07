@@ -61,7 +61,7 @@ drawCards = function(_cards) {
 
 createCard = function(_id, _pile) {
 	var _card = instance_create_layer(_pile.x, _pile.y, "Cards", oCard);
-	_card.cardData = variable_clone(cardCatalogue[_id]);
+	_card.cardData = variable_clone(cardCatalogue[$ _id]);
 	
 	_pile.insertCard(_card);
 	
@@ -111,29 +111,23 @@ endTurn = function() {
 	stacking = 0;
 }
 
-cardCatalogue = [
-	new Card("Vessel of Avarice", "Draw 2", 0, 1,
-		CLOSURE {
-			drawCards(2);
-			return PILE.EXHAUST;
-		}
-	),
-	new Card("Common Sense", "Draw 1\n+1", 1, 1,
-		CLOSURE {drawCards(1); return PILE.DISCARD;}, 
+cardCatalogue = {
+	"Add1": new Card("Common Sense", "+1", 1, -1, EFFECT_UNPLAYABLE, 
 		CLOSURE {cardScore += 1;}
 	),
-	new Card("Holy Crap", "Unplayable\nx2", 1, 0, EFFECT_UNPLAYABLE,
-		CLOSURE {
-			cardScore *= 2;
-		}
+	"Add3": new Card("General Knowledge", "+3", 1, -1, EFFECT_UNPLAYABLE,
+		CLOSURE {cardScore += 3;}
 	),
-	new Card("Study", "Stack", 1, 1,
+	"Times2": new Card("Holy Crap", "Unplayable\nx2", 1, 0, EFFECT_UNPLAYABLE,
+		CLOSURE {cardScore *= 2;}
+	),
+	"Stack1": new Card("Write Up", "Stack 1", 0, 1,
 		CLOSURE {
 			stacking += 1;
 			return PILE.DISCARD;	
 		},
 	),
-	new Card("Pop", "Exhaust top\ncard on stack", 1, 1,
+	"Pop": new Card("Pop", "Exhaust top\ncard on stack", 0, 1,
 		CLOSURE {
 			var _card = stack.topCard();
 			with (_card) {
@@ -143,11 +137,11 @@ cardCatalogue = [
 			return PILE.DISCARD;
 		},
 	),
-	new Card("Rush", "Stack 2\nStack Negative\nCommon Sense", 1, 1,
+	"Rush": new Card("Rush", "Stack 2\nStack Negative\nCommon Sense", 2, 1,
 		CLOSURE {
 			stacking += 2;
 			
-			with (createCard(1, stack).cardData) {
+			with (createCard("Add1", stack).cardData) {
 				ScoreEffect = CLOSURE {oCardController.cardScore -= 1};
 				description = "-1";
 			}
@@ -155,11 +149,22 @@ cardCatalogue = [
 			return PILE.DISCARD;
 		},
 	),
-	new Card("Grind", "Stack 2\n Draw 1", 0, 2,
+	"AI": new Card("Prompt AI", "Add General Knowledge\nto hand\n50% of being Negative", 2, 0,
+		CLOSURE {
+			with (createCard("Add3", hand).cardData) {
+				if (choose(true, false)) {
+					ScoreEffect = CLOSURE {oCardController.cardScore -= 3};
+					description = "-3";
+				}
+			}
+			return PILE.DISCARD;
+		},
+	),
+	"Grind": new Card("Grind", "Stack 2\n Draw 1", 2, 2,
 		CLOSURE {
 			stacking += 2;
 			drawCards(1);
 			return PILE.DISCARD;
 		}
 	),
-];
+};
