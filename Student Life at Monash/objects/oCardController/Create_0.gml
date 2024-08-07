@@ -3,7 +3,7 @@
 
 // global variables
 global.draggingCard = false;
-global.lastDeck = noone;
+global.lastPile = noone;
 global.lastIndex = -1;
 
 global.cardCatalogue = [
@@ -14,37 +14,37 @@ global.cardCatalogue = [
 
 cardScore = 0;
 
-deck = noone;
+draw = noone;
 hand = noone;
 discard = noone;
 stack = noone;
 exhaust = noone;
 
-getDeck = function(_deckID) {
-	return [deck, hand, discard, stack, exhaust][_deckID];	
+getPile = function(_pileID) {
+	return [draw, hand, discard, stack, exhaust][_pileID];	
 }
 
 discardHand = function() {
 	hand.transferCards(discard);	
 }
 
-shuffleDeck = function(_callback = EmptyScript) {
-	discard.transferCards(deck, undefined, _callback);	
-	deck.shuffle();
+shufflePile = function(_callback = EmptyScript) {
+	discard.transferCards(draw, undefined, _callback);	
+	draw.shuffle();
 }
 
 drawHand = function(_cards) {
-	if (deck.cardCount() < _cards) {
-		_cards -= deck.cardCount();
-		deck.transferCards(hand);
+	if (draw.cardCount() < _cards) {
+		_cards -= draw.cardCount();
+		draw.transferCards(hand);
 		
-		var _callback = method({deck, hand, _cards}, function() {deck.transferCards(hand, _cards);});
+		var _callback = method({draw, hand, _cards}, function() {draw.transferCards(hand, _cards);});
 		
-		shuffleDeck(_callback);	
+		shufflePile(_callback);	
 	}
 	else
 	{
-		deck.transferCards(hand, _cards);
+		draw.transferCards(hand, _cards);
 	}
 }
 

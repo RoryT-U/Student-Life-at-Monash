@@ -2,8 +2,8 @@
 // You can write your code in this editor
 
 dragged = false;
-deck = noone;
-deckIndex = -1;
+pile = noone;
+pileIndex = -1;
 
 mouseInside = false;
 
@@ -29,5 +29,5 @@ setHover = function(_set) {
 /// @desc Update depth of card after changing index, dragging or hovering
 updateDepth = function() {
 	var _inFront = dragged || homeOffsetY != 0;
-	depth = _inFront ? -1000 : -deckIndex;	
+	depth = _inFront ? -1000 : -pileIndex;	
 }

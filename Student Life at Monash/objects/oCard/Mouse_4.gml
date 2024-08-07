@@ -3,10 +3,10 @@
 
 // abort if another card is being dragged
 if !dragged && global.draggingCard exit;
-// abort if deck is non selectable or is selecting another card
-with deck {
+// abort if pile is non selectable or is selecting another card
+with pile {
 	if !selectable exit;
-	else if selectedIndex != -1 && selectedIndex != other.deckIndex exit;
+	else if selectedIndex != -1 && selectedIndex != other.pileIndex exit;
 }
 
 dragged = !dragged;
@@ -16,27 +16,27 @@ if !dragged {
 	// drop card
 	global.draggingCard = false;
 	
-	var _deck = collision_point(x, y, oDeck, true, false);
+	var _pile = collision_point(x, y, oPile, true, false);
 	
-	if _deck == noone || _deck.selectable == false {
+	if _pile == noone || _pile.selectable == false {
 		// drop on field
 		var _playResult = cardData.PlayEffect();
 		if (_playResult != -1) {
 			// success
 			setHover(false);
-			with (oCardController.getDeck(_playResult)) {
+			with (oCardController.getPile(_playResult)) {
 				insertCard(other);
 			}
 		} else {
 			// failure
-			with global.lastDeck {
+			with global.lastPile {
 				insertCard(other, global.lastIndex);
 				selectedIndex = global.lastIndex;
 			}
 		}
-	} else if _deck != deck {
-		// add to deck
-		with _deck {
+	} else if _pile != pile {
+		// add to pile
+		with _pile {
 			insertCard(other, gapIndex);
 			selectedIndex = gapIndex;
 			setGapIndex(-1);
@@ -45,11 +45,11 @@ if !dragged {
 } else {
 	// pick up card
 	global.draggingCard = true;
-	global.lastDeck = deck;
-	global.lastIndex = deckIndex;
+	global.lastPile = pile;
+	global.lastIndex = pileIndex;
 	
 	// unhover and remove
-	with deck {
+	with pile {
 		selectedIndex = -1;
 		removeCard(other);
 	}

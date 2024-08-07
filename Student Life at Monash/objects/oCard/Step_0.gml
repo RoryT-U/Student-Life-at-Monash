@@ -6,7 +6,7 @@ if dragged {
 	x = lerp(x, mouse_x, 0.5);
 	y = lerp(y, mouse_y, 0.5);
 	
-	with collision_point(mouse_x, mouse_y, oDeck, true, false) {
+	with collision_point(mouse_x, mouse_y, oPile, true, false) {
 		cardInside(other.x, other.y);	
 	}
 } else {
@@ -15,7 +15,7 @@ if dragged {
 	visualOffsetY = lerp(visualOffsetY, homeOffsetY, 0.2);
 	
 	//var _homeScale = 1;
-	//with (deck) {
+	//with (pile) {
 	//	if (compact) {
 	//		_homeScale = 0.1;	
 	//	}
