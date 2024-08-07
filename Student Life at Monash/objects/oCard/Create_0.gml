@@ -29,13 +29,14 @@ setHover = function(_set) {
 	}
 	updateDepth();
 }
-	
-moveTo = function(_targetPile) {
-	with (pile) {
-		pile.removeCard(other);
-	}
-	_targetPile.insertCard(self);
-}
+
+// this guy always crashes idk why
+//moveTo = function(_targetPile) {
+//	with (pile) {
+//		pile.removeCard(other);
+//	}
+//	_targetPile.insertCard(self);
+//}
 
 tryPlayCard = function() {
 	var _playResult = cardData.cost <= oCardController.energy ? cardData.PlayEffect() : -1;
