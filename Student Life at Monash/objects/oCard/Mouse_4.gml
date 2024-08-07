@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 // abort if another card is being dragged
-if !dragged && global.draggingCard exit;
+if !dragged && oCardController.draggingCard exit;
 // abort if pile is non selectable or is selecting another card
 with pile {
 	if !selectable exit;
@@ -14,7 +14,7 @@ updateDepth();
 
 if !dragged {
 	// drop card
-	global.draggingCard = false;
+	oCardController.draggingCard = false;
 	
 	var _pile = collision_point(x, y, oPile, true, false);
 	
@@ -29,9 +29,9 @@ if !dragged {
 			}
 		} else {
 			// failure
-			with global.lastPile {
-				insertCard(other, global.lastIndex);
-				selectedIndex = global.lastIndex;
+			with oCardController.lastPile {
+				insertCard(other, oCardController.lastIndex);
+				selectedIndex = oCardController.lastIndex;
 			}
 		}
 	} else if _pile != pile {
@@ -44,9 +44,9 @@ if !dragged {
 	}
 } else {
 	// pick up card
-	global.draggingCard = true;
-	global.lastPile = pile;
-	global.lastIndex = pileIndex;
+	oCardController.draggingCard = true;
+	oCardController.lastPile = pile;
+	oCardController.lastIndex = pileIndex;
 	
 	// unhover and remove
 	with pile {

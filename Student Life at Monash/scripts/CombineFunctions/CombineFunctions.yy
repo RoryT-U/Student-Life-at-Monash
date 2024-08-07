@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"CombineFunctions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CombineFunctions",
+  "parent":{
+    "name":"Utility",
+    "path":"folders/Scripts/Utility.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

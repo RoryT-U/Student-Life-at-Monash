@@ -1,7 +1,7 @@
 /// @description Card hover
 // You can write your code in this editor
 
-if global.draggingCard || !selectable exit;
+if oCardController.draggingCard || !selectable exit;
 
 var _cardCount = array_length(cards);
 

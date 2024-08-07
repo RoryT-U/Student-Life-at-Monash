@@ -3,4 +3,4 @@
 
 var _newCard = instance_create_layer(x, y, "Cards", oCard);
 
-insertCard(_newCard, 0);
+insertCard(_newCard);

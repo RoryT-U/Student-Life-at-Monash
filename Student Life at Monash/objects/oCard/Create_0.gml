@@ -14,8 +14,12 @@ visualOffsetY = 0;
 homeOffsetY = 0;
 
 // random card
-cardData = variable_clone(global.cardCatalogue[choose(0, 1, 2)]);
+cardData = variable_clone(oCardController.cardCatalogue[choose(0, 1, 2)]);
 // card = struct
+
+getHover = function() {
+	return homeOffsetY != 0;	
+}
 
 setHover = function(_set) {
 	if _set {

@@ -34,7 +34,7 @@ insertCard = function(_card, _index = cardCount()) {
 	}
 	
 	array_insert(cards, _index, _card);
-	selectedIndex = _index;
+	if (_card.getHover()) {selectedIndex = _index;}
 	_card.pile = self;
 	_card.image_index = faceDown ? 1 : 0;
 	
@@ -44,6 +44,8 @@ insertCard = function(_card, _index = cardCount()) {
 removeCard = function(_card) {
 	array_delete(cards, _card.pileIndex, 1);
 	_card.pile = noone;
+	
+	if (selectedIndex == _card.pileIndex) {selectedIndex = -1;}
 	
 	updateCardHome();
 }
@@ -81,7 +83,9 @@ updateCardHome = function() {
 			_card.pileIndex = i;
 			_card.homeX = _leftMost + i * spacing;
 			_card.homeY = y;
+			_card.setHover(i == selectedIndex);
 			_card.updateDepth();
+			//show_debug_message("i: {0} selected {1}",i , selectedIndex);
 		}
 	} else {
 		var _leftMost = x - (_cardCount / 2) * spacing;
@@ -92,6 +96,7 @@ updateCardHome = function() {
 			_card.pileIndex = i;
 			_card.homeX = _leftMost + i * spacing;
 			_card.homeY = y;
+			_card.setHover(i == selectedIndex);
 			_card.updateDepth();
 		}
 		// post gap
@@ -101,17 +106,20 @@ updateCardHome = function() {
 			_card.pileIndex = i;
 			_card.homeX = _leftMost + (i + 1) * spacing;
 			_card.homeY = y;
+			_card.setHover(i == selectedIndex);
 			_card.updateDepth();
 		}
 	}
 }
 
-/// @desc Transfer some number of top cards to another pile (cards of higher index are on top)
+/// @desc Transfer some number of top cards to another pile (cards of higher index are on top). Buttons are disabled during the transfer animation.
 /// @param {Id.Instance}	_targetPile	Pile to transfer cards to
 /// @param {real}			_number		Cards to transfer, defaults to all cards
 transferCards = function(_targetPile, _number = cardCount(), _callback = EmptyScript) {
-	_number = min(_number, cardCount());
+	SetButtonsEnabled(false);
+	var _reEnable = CLOSURE{SetButtonsEnabled(true)};
 	
+	_number = min(_number, cardCount());
 	if (_number != 0) {
 		var _transferCard = function(_targetPile) {
 			var _currentCard = cards[cardCount() - 1];
@@ -123,5 +131,5 @@ transferCards = function(_targetPile, _number = cardCount(), _callback = EmptySc
 		time_source_start(_timer);
 	}
 	
-	call_later(0.05 * (_number + 1), time_source_units_seconds, _callback);
+	call_later(0.05 * (_number + 1), time_source_units_seconds, CombineFunctions(_reEnable, _callback));
 }
