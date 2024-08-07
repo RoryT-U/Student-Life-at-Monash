@@ -3,6 +3,7 @@
 
 #macro EFFECT_STACK function() {return PILE.STACK;}
 #macro EFFECT_DISCARD function() {return PILE.DISCARD;}
+#macro EFFECT_UNPLAYABLE function() {return -1;}
 
 enum CARD_TYPE {
 	VALUE,
@@ -42,11 +43,11 @@ enum PILE {
 // Next played
 // Top of [pile]
 
-function Card(_name, _description, _imageID, _type, _cost, _playEffect = EFFECT_DISCARD, _scoreEffect = EmptyScript, _discardEffect = EmptyScript) constructor {
+function Card(_name, _description, _imageID, _cost, _playEffect = EFFECT_DISCARD, _scoreEffect = EmptyScript, _discardEffect = EmptyScript) constructor {
 	name = _name;
 	description = _description;
 	imageID = _imageID;
-	type = _type;
+	type = "unused lol";
 	cost = _cost;
 	
 	// returns a pile index to determine what pile it ends up in after being played

@@ -7,32 +7,7 @@ lastPile = noone;
 lastIndex = -1;
 history = [];
 
-cardCatalogue = [
-	new Card("Vessel of Avarice", "Draw 2", 0, CARD_TYPE.ACTION, 1,
-		CLOSURE {
-			drawCards(2);
-			return PILE.EXHAUST;
-		}
-	),
-	new Card("Common Sense", "Stack\n+1", 1, CARD_TYPE.VALUE, 1, EFFECT_STACK, 
-		CLOSURE {cardScore += 1;}
-	),
-	new Card("Holy Crap", "Stack\nx2", 1, CARD_TYPE.VALUE, 2, EFFECT_STACK,
-		CLOSURE {
-			cardScore *= 2;
-			return PILE.EXHAUST;
-		}
-	),
-	new Card("Rush", "Stack\nDraw 1\n-1", 1, CARD_TYPE.VALUE, 0,
-		CLOSURE {
-			drawCards(1);
-			return PILE.STACK;	
-		},
-		CLOSURE {
-			cardScore -= 1;	
-		}
-	),
-];
+stacking = 0;
 
 cardScore = 0;
 
@@ -46,6 +21,8 @@ energy = 0;
 turnEnergy = 3;
 
 turn = 0;
+
+alarm[0] = 1;
 
 getPile = function(_pileID) {
 	return [draw, hand, discard, stack, exhaust][_pileID];	
@@ -82,6 +59,15 @@ drawCards = function(_cards) {
 	}
 }
 
+createCard = function(_id, _pile) {
+	var _card = instance_create_layer(_pile.x, _pile.y, "Cards", oCard);
+	_card.cardData = variable_clone(cardCatalogue[_id]);
+	
+	_pile.insertCard(_card);
+	
+	return _card;
+}
+
 // turn control
 scoreStack = function() {
 	SetButtonsEnabled(false);
@@ -115,11 +101,60 @@ scoreStack = function() {
 	var _exhaust = method({stack, exhaust, _leaveGame}, function() {stack.transferCards(exhaust, undefined, _leaveGame);});
 	call_later(0.7 * (_number + 1), time_source_units_seconds, _exhaust);
 }
-	
-alarm[0] = 1;
 
 endTurn = function() {
-	hand.transferCards(discard, hand.cardCount(), function() {drawCards(5)});
+	hand.transferCards(discard, hand.cardCount(), function() {
+		drawCards(5)
+	});
 	energy = turnEnergy;
 	turn += 1;
 }
+
+cardCatalogue = [
+	new Card("Vessel of Avarice", "Draw 2", 0, 1,
+		CLOSURE {
+			drawCards(2);
+			return PILE.EXHAUST;
+		}
+	),
+	new Card("Common Sense", "Draw 1\n+1", 1, 1,
+		CLOSURE {drawCards(1); return PILE.DISCARD;}, 
+		CLOSURE {cardScore += 1;}
+	),
+	new Card("Holy Crap", "Unplayable\nx2", 1, 0, EFFECT_UNPLAYABLE,
+		CLOSURE {
+			cardScore *= 2;
+		}
+	),
+	new Card("Study", "Stack", 1, 1,
+		CLOSURE {
+			stacking += 1;
+			return PILE.DISCARD;	
+		},
+	),
+	new Card("Pop", "Exhaust top\ncard on stack", 1, 1,
+		CLOSURE {
+			stack[-1].moveTo(exhaust);
+			return PILE.DISCARD;
+		},
+	),
+	new Card("Rush", "Stack 2\nStack Negative\nCommon Sense", 1, 1,
+		CLOSURE {
+			stacking += 2;
+			
+			with (createCard(1, stack).cardData) {
+				ScoreEffect = CLOSURE {oCardController.cardScore -= 1};
+				description = "-1";
+			}
+			
+			return PILE.DISCARD;
+		},
+	),
+	new Card("Grind", "Stack 2\n Draw 1", 0, 2,
+		CLOSURE {
+			stacking += 2;
+			drawCards(1);
+			return PILE.DISCARD;
+		}
+	),
+];

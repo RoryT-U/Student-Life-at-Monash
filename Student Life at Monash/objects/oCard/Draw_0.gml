@@ -21,7 +21,7 @@ draw_sprite_ext(sCardImages, cardData.imageID, x, y + visualOffsetY + CARD_IMAGE
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_set_font(fCardText);
-draw_text_transformed(x, y + visualOffsetY + CARD_TEXT_Y_OFFSET, cardData.description, 0.75, 0.75, 0);
+draw_text_transformed(x, y + visualOffsetY + CARD_TEXT_Y_OFFSET, cardData.description, 0.6, 0.6, 0);
 
 // energy
 draw_sprite(sEnergy, 0, x + ENERGY_X_OFFSET, y + ENERGY_Y_OFFSET + visualOffsetY);

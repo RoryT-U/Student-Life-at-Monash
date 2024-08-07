@@ -24,7 +24,7 @@ shuffle = function() {
 
 /// @desc Insert card at specified index, default to inserting at the end
 /// @param {Id.Instance}	_card	Card to insert
-/// @param {real}			_index	Index to insert card at, defaults to current card count
+/// @param {real}			_index	Index to insert card at, defaults to current card count, index of -1 is translated to 0
 insertCard = function(_card, _index = cardCount()) {
 	if _card.pile == self {
 		return;
@@ -122,9 +122,9 @@ transferCards = function(_targetPile, _number = cardCount(), _callback = EmptySc
 	_number = min(_number, cardCount());
 	if (_number > 0) {
 		var _transferCard = function(_targetPile) {
-			var _currentCard = cards[cardCount() - 1];
-			removeCard(_currentCard);
-			_targetPile.insertCard(_currentCard, _targetPile.cardCount());
+			var _card = cards[cardCount()-1]
+			removeCard(_card);
+			_targetPile.insertCard(_card);
 		}
 	
 		var _timer = time_source_create(time_source_game, 0.05, time_source_units_seconds, _transferCard, [_targetPile], _number);

@@ -8,6 +8,7 @@ if (dragged) {
 	}
 	
 	// drop card
+	dragged = false;
 	oCardController.draggingCard = false;
 	
 	var _pile = collision_point(x, y, oPile, true, false);

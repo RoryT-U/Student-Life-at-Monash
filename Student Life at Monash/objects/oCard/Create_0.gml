@@ -29,16 +29,26 @@ setHover = function(_set) {
 	}
 	updateDepth();
 }
+	
+moveTo = function(_targetPile) {
+	with (pile) {
+		pile.removeCard(other);
+	}
+	_targetPile.insertCard(self);
+}
 
 tryPlayCard = function() {
 	var _playResult = cardData.cost <= oCardController.energy ? cardData.PlayEffect() : -1;
 	if (_playResult != -1) {
 		// success
 		oCardController.energy -= cardData.cost;
-		setHover(false);
+		
+		array_insert(oCardController.history, -1, self);
+		
 		with (oCardController.getPile(_playResult)) {
 			insertCard(other);
 		}
+		
 		return true;
 	} else {
 		// failure
@@ -49,5 +59,5 @@ tryPlayCard = function() {
 /// @desc Update depth of card after changing index, dragging or hovering
 updateDepth = function() {
 	var _inFront = dragged || homeOffsetY != 0;
-	depth = _inFront ? -100 : -pileIndex;	
+	depth = _inFront ? -100 : -pileIndex;
 }

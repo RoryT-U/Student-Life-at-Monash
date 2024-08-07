@@ -20,7 +20,10 @@ if !dragged {
 	
 	if _pile == noone || _pile.selectable == false {
 		// drop on field
-		if (!tryPlayCard()) {
+		if (oCardController.stacking > 0) {
+			oCardController.stack.insertCard(self);
+			oCardController.stacking -= 1;
+		} else if (!tryPlayCard()) {
 			// return to hand if failed
 			with oCardController.lastPile {
 				insertCard(other, oCardController.lastIndex);
@@ -42,6 +45,7 @@ if !dragged {
 	oCardController.lastIndex = pileIndex;
 	
 	// unhover and remove
+	setHover(false);
 	with pile {
 		selectedIndex = -1;
 		removeCard(other);
