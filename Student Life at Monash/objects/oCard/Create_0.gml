@@ -30,8 +30,26 @@ setHover = function(_set) {
 	updateDepth();
 }
 
+playCard = function() {
+	var _playResult = cardData.cost <= oCardController.energy ? cardData.PlayEffect() : -1;
+	if (_playResult != -1) {
+		// success
+		oCardController.energy -= cardData.cost;
+		setHover(false);
+		with (oCardController.getPile(_playResult)) {
+			insertCard(other);
+		}
+	} else {
+		// failure
+		with oCardController.lastPile {
+			insertCard(other, oCardController.lastIndex);
+			selectedIndex = oCardController.lastIndex;
+		}
+	}
+}
+
 /// @desc Update depth of card after changing index, dragging or hovering
 updateDepth = function() {
 	var _inFront = dragged || homeOffsetY != 0;
-	depth = _inFront ? -1000 : -pileIndex;	
+	depth = _inFront ? -100 : -pileIndex;	
 }

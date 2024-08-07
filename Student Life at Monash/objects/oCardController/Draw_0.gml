@@ -3,4 +3,5 @@
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_text(x, y, cardScore);
+var _text = string("Turn: {0}, Energy: {1}/{2}, Score: {3}", turn, energy, turnEnergy, cardScore);
+draw_text(x, y, _text);

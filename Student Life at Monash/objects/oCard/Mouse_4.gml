@@ -20,20 +20,7 @@ if !dragged {
 	
 	if _pile == noone || _pile.selectable == false {
 		// drop on field
-		var _playResult = cardData.PlayEffect();
-		if (_playResult != -1) {
-			// success
-			setHover(false);
-			with (oCardController.getPile(_playResult)) {
-				insertCard(other);
-			}
-		} else {
-			// failure
-			with oCardController.lastPile {
-				insertCard(other, oCardController.lastIndex);
-				selectedIndex = oCardController.lastIndex;
-			}
-		}
+		playCard();
 	} else if _pile != pile {
 		// add to pile
 		with _pile {

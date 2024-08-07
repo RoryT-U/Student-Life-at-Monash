@@ -120,7 +120,7 @@ transferCards = function(_targetPile, _number = cardCount(), _callback = EmptySc
 	var _reEnable = CLOSURE{SetButtonsEnabled(true)};
 	
 	_number = min(_number, cardCount());
-	if (_number != 0) {
+	if (_number > 0) {
 		var _transferCard = function(_targetPile) {
 			var _currentCard = cards[cardCount() - 1];
 			removeCard(_currentCard);
