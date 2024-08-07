@@ -108,6 +108,7 @@ endTurn = function() {
 	});
 	energy = turnEnergy;
 	turn += 1;
+	stacking = 0;
 }
 
 cardCatalogue = [
@@ -134,7 +135,11 @@ cardCatalogue = [
 	),
 	new Card("Pop", "Exhaust top\ncard on stack", 1, 1,
 		CLOSURE {
-			stack[-1].moveTo(exhaust);
+			var _card = stack.topCard();
+			with (_card) {
+				pile.removeCard(self);
+				other.exhaust.insertCard(self);
+			}
 			return PILE.DISCARD;
 		},
 	),

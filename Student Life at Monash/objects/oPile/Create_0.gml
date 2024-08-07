@@ -22,6 +22,14 @@ shuffle = function() {
 	updateCardHome();
 }
 
+topCard = function() {
+	if (cardCount() > 0) {
+		return cards[cardCount() - 1];
+	} else {
+		return noone;
+	}
+}
+
 /// @desc Insert card at specified index, default to inserting at the end
 /// @param {Id.Instance}	_card	Card to insert
 /// @param {real}			_index	Index to insert card at, defaults to current card count, index of -1 is translated to 0
