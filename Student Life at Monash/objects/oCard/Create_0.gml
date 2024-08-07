@@ -30,7 +30,7 @@ setHover = function(_set) {
 	updateDepth();
 }
 
-playCard = function() {
+tryPlayCard = function() {
 	var _playResult = cardData.cost <= oCardController.energy ? cardData.PlayEffect() : -1;
 	if (_playResult != -1) {
 		// success
@@ -39,12 +39,10 @@ playCard = function() {
 		with (oCardController.getPile(_playResult)) {
 			insertCard(other);
 		}
+		return true;
 	} else {
 		// failure
-		with oCardController.lastPile {
-			insertCard(other, oCardController.lastIndex);
-			selectedIndex = oCardController.lastIndex;
-		}
+		return false;
 	}
 }
 

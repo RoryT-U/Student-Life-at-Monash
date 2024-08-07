@@ -20,7 +20,13 @@ if !dragged {
 	
 	if _pile == noone || _pile.selectable == false {
 		// drop on field
-		playCard();
+		if (!tryPlayCard()) {
+			// return to hand if failed
+			with oCardController.lastPile {
+				insertCard(other, oCardController.lastIndex);
+				selectedIndex = oCardController.lastIndex;
+			}	
+		}
 	} else if _pile != pile {
 		// add to pile
 		with _pile {

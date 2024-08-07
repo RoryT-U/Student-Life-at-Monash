@@ -5,6 +5,7 @@
 draggingCard = false;
 lastPile = noone;
 lastIndex = -1;
+history = [];
 
 cardCatalogue = [
 	new Card("Vessel of Avarice", "Draw 2", 0, CARD_TYPE.ACTION, 1,
@@ -111,7 +112,7 @@ scoreStack = function() {
 	
 	var _leaveGame = CLOSURE {room_goto(rVillage);};
 	
-	var _exhaust = method({stack, exhaust}, function() {stack.transferCards(exhaust);});
+	var _exhaust = method({stack, exhaust, _leaveGame}, function() {stack.transferCards(exhaust, undefined, _leaveGame);});
 	call_later(0.7 * (_number + 1), time_source_units_seconds, _exhaust);
 }
 	
@@ -120,4 +121,5 @@ alarm[0] = 1;
 endTurn = function() {
 	hand.transferCards(discard, hand.cardCount(), function() {drawCards(5)});
 	energy = turnEnergy;
+	turn += 1;
 }
